@@ -11,11 +11,11 @@ const pool = mysql.createConnection({
 
 let userTable ={}
 
-// 
+// Register a user
 userTable.register =(user) =>{
 
     return new Promise((resolve,reject)=>{
-
+        //hashing the password
         const salt = bcrypt.genSalt(10);
         user[password] = bcrypt.hashSync(user[password],salt)
 
@@ -28,6 +28,7 @@ userTable.register =(user) =>{
     })
 }
 
+// get user by its email
 userTable.getUserByEmail = (email) =>{
     return new Promise((resolve,reject)=>{
         pool.query(`SELECT * FROM user WHERE email=?`,[email],(err,result)=>{
@@ -39,6 +40,7 @@ userTable.getUserByEmail = (email) =>{
     })
 }
 
+//get password by a user's mail to verify when logging in
 userTable.getPasswordByMail = (email) =>{
     return new Promise((resolve,reject)=>{
         pool.query(`SELECT * FROM user WHERE email=?`,[email],(err,result)=>{

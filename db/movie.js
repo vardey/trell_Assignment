@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-
+//created connection pool
 const pool = mysql.createConnection({
     host:'localhost',
     user:'root',
@@ -8,10 +8,10 @@ const pool = mysql.createConnection({
     database:'theatre'
 });
 
-
+//empty object to create functions for the endpoints
 let moviesTable ={}
 
-
+// inserting movie
 moviesTable.create =(movie) =>{
     return new Promise((resolve,reject)=>{
         pool.query(`INSERT INTO movies SET ?`,movie,(err,result)=>{
@@ -23,7 +23,7 @@ moviesTable.create =(movie) =>{
     })
 }
 
-
+// get all the movies
 moviesTable.getALL =() =>{
 
     return new Promise((resolve,reject)=>{
@@ -36,13 +36,14 @@ moviesTable.getALL =() =>{
     })
 }
 
-moviesTable.getByID = (title) =>{
+// get movie by its title
+moviesTable.getByTitle = (title) =>{
     return new Promise((resolve,reject)=>{
         pool.query(`SELECT * FROM movies WHERE title=?`,[title],(err,result)=>{
             if(err){
                 return reject(err)
             }
-            if(result.length!=0)
+            if(result.length!=0) 
             return resolve(result[0])
             else
             console.log('Movie does not exists');

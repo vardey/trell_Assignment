@@ -5,7 +5,7 @@ const movieRouter = express.Router();
 // get movie by its title
 movieRouter.get('/:title',async(req,res)=>{
     try{
-        let results = await db.getByID(req.params.title);
+        let results = await db.getByTitle(req.params.title);
         res.json(results);
     }catch(e){
         console.log(e)

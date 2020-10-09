@@ -23,11 +23,13 @@ userRouter.get('/:email',async(req,res)=>{
 userRouter.get('/:email',async(req,res)=>{
     try {
 
+        // user has typed in password, the password field was not empty
         if(req.body.password){
 
             // password saved in db
             let passDB = await db.getPasswordByMail(req.params.email);
 
+            // compaing the hash password (stored in DB) and the user typed in 
             if(!bcrypt.compareSync(req.params.password,passDB))
             {
                 console.log('Invalid Credentials')
@@ -40,6 +42,7 @@ userRouter.get('/:email',async(req,res)=>{
             }
         }
         else{
+            // user did not type password
             res.send(200).status({message:'Insert Password'})
         }
         

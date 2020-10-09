@@ -15,6 +15,7 @@ orderRouter.post('/create',async(req,res)=>{
     }
 })
 
+//find all orders of a user 
 orderRouter.get('/:email',async(req,res)=>{
     try{
         let results = await db.findAllOrdersByUser(req.params.email);

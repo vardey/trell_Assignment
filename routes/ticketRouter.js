@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../db/ticket')
 const ticketRouter = express.Router();
 
+//create a ticket
 ticketRouter.post('/',async(req,res)=>{
     try{
         let results = db.create(req.body)

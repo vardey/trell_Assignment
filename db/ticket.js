@@ -11,13 +11,13 @@ const pool = mysql.createConnection({
 
 let ticketsTable ={}
 
-// create a ticket by user
+// create a ticket 
 ticketsTable.create =(ticket) =>{
     return new Promise((resolve,reject)=>{
-        pool.query(`INSERT INTO tickets SET ?`,ticet,(err,result)=>{
+        pool.query(`INSERT INTO tickets SET ?`,ticket,(err,result)=>{
             if(err){
                 return reject(err)
-            }s
+            }
             return resolve(result)
         })
     })
